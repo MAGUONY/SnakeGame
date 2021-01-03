@@ -36,16 +36,18 @@ while keepPlaying:
         theScore.addScore()
 
     # Detect collision with a wall
-    if theSnake.theHead.xcor() > 280 or theSnake.theHead.xcor() < -280 or theSnake.theHead.xcor() > 280 or theSnake.theHead.ycor() < -280:
-        theScore.gameOver()
-        keepPlaying = False
+    if theSnake.theHead.xcor() > 280 or theSnake.theHead.xcor() < -280 or theSnake.theHead.ycor() > 280 or theSnake.theHead.ycor() < -280:
+        theScore.reset()
+        theSnake.reset()
 
     # Detect collision with tail
     for bodyParts in theSnake.theTurtles[1:]:  # Slicing to start checking the body parts not including the head
+        if bodyParts == theSnake.theHead:
+            pass
 
-        if theSnake.theHead.distance(bodyParts) < 10:
-            theScore.gameOver()
-            keepPlaying = False
+        elif theSnake.theHead.distance(bodyParts) < 10:
+            theScore.reset()
+            theSnake.reset()
 
 
 theScreen.exitonclick()
